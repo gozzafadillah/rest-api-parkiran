@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Plat;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PlatController extends Controller
 {
@@ -14,7 +15,7 @@ class PlatController extends Controller
      */
     public function index()
     {
-        $plat = Plat::paginate(10);
+        $plat = Plat::all();
         return response()->json([
             "data" => $plat
         ]);
@@ -30,14 +31,14 @@ class PlatController extends Controller
     public function store(Request $request)
     {
         $plat = Plat::create([
-            "plat" => $request->plat,
-            "nama" => $request->nama,
-            "id_plat" => $request->id_plat,
-            "keterangan" => $request->keterangan,
-            "free" => $request->free,
-            "saldo" => $request->saldo,
-            "status" => $request->status,
-            "plat_nomor" => $request->plat_nomor,
+            "Plat" => $request->Plat,
+            "Nama" => $request->Nama,
+            "ID_Plat" => $request->ID_Plat,
+            "Keterangan" => $request->Keterangan,
+            "Free" => $request->Free,
+            "Saldo" => $request->Saldo,
+            "Status" => $request->Status,
+            "Plat_Nomor" => $request->Plat_Nomor,
         ]);
         return response()->json([
             "data" => $plat
@@ -52,8 +53,9 @@ class PlatController extends Controller
      */
     public function show(Plat $plat)
     {
+        $data = DB::table('data_plat')->where("Plat", "=", $plat->Plat)->get();
         return response()->json([
-            "data" => $plat
+            "data" => $data
         ]);
     }
 
@@ -66,14 +68,14 @@ class PlatController extends Controller
      */
     public function update(Request $request, Plat $plat)
     {
-        $plat->nama = $request->nama;
-        $plat->plat = $request->plat;
-        $plat->id_plat = $request->id_plat;
-        $plat->keterangan = $request->keterangan;
-        $plat->plat_nomor = $request->plat_nomor;
-        $plat->status = $request->status;
-        $plat->free = $request->free;
-        $plat->saldo = $request->saldo;
+        $plat->Nama = $request->Nama;
+        $plat->Plat = $request->Plat;
+        $plat->ID_Plat = $request->ID_Plat;
+        $plat->Keterangan = $request->Keterangan;
+        $plat->Plat_Nomor = $request->Plat_Nomor;
+        $plat->Status = $request->Status;
+        $plat->Free = $request->Free;
+        $plat->Saldo = $request->Saldo;
         $plat->save();
 
         return response()->json([
@@ -91,7 +93,8 @@ class PlatController extends Controller
     {
         $plat->delete();
         return response()->json([
-            "message" => "success delete data"
+            "message" => "success delete data",
+            "data" => $plat
         ]);
     }
 }

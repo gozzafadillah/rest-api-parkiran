@@ -14,16 +14,14 @@ return new class extends Migration
     public function up()
     {
         Schema::create('plats', function (Blueprint $table) {
-            $table->id();
-            $table->string("plat");
-            $table->string("nama");
-            $table->string("id_plat");
-            $table->string("keterangan");
-            $table->integer("free");
-            $table->integer("saldo");
-            $table->string("status");
-            $table->string("plat_nomor");
-            $table->timestamps();
+            $table->string("Plat")->primary();
+            $table->string("Nama");
+            $table->string("Keterangan");
+            $table->string("ID_Plat");
+            $table->integer("Saldo");
+            $table->integer("Free");
+            $table->string("Plat_Nomor");
+            $table->string("Status");
         });
     }
 
